@@ -1,0 +1,48 @@
+Idea given a project directory make a project structure for a Github README.md 
+
+like the following: 
+```
+public/                   
+src/
+├── assets/
+│   └── thankYouImage.png         
+├── components/        
+│   ├── CustomThankYouPDF.jsx        
+│   ├── FormInput.jsx    
+│   ├── GeneratePDFButton.jsx
+│   └── Header.jsx
+├── pages/             
+│   └── ThankYouPage.jsx                     
+├── services/          
+│   └── pdfService.jsx                            
+├── utils/
+│   └── thankYouMessage.js                       
+├── styles/
+│   ├── CustomThankYouPDF.css        
+│   ├── FormInput.css    
+│   ├── GeneratePDFButton.css
+│   └── Header.css                        
+├── App.jsx            
+├── main.jsx           
+├── index.html            
+.gitignore
+package.json
+vite.config.js
+README.md
+```
+
+TODO List: 
+get a desired path easy at the start 
+then get each folder perhaps stored as a dictionary? like dict: [file1, file2 etc] or maybe if there is a folder store it [folder1/, folder2/] and then jump create a new key. 
+maybe create a tree for the file structure. 
+Print it out to verify if it is correct 
+then print it out in the desired format. 
+probably output this to a .md/.txt file for the user to copy and paste
+maybe make a GUI so user can either type their directory or navigate to it
+
+EDGE CASES: 
+for some folders like data folders there will be lots of files, which should not be included, perhaps could just be a so take the first 9 and then last file. 
+some folders will just contain other folders, eg in bigger react projects there could be components/forms/files. 
+user enters the wrong path 
+
+
