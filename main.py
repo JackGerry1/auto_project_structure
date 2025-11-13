@@ -1,6 +1,6 @@
 import os
 
-PATH = "/home/jack/Documents/Work/Job Applications/Anima International Prep/reactProject/src"
+PATH = "test1"
 
 
 def build_structure(path: str) -> dict:
@@ -55,10 +55,13 @@ def print_structure(structure: dict, prefix="", root=True) -> str:
 def main(): 
     file_structure = {os.path.basename(PATH): build_structure(PATH)}
 
+
+
     length = 10
 
     cleaned_structure = trim_dictionary(file_structure, length)
 
+    print(cleaned_structure)
     output = print_structure(cleaned_structure)
     final_output = f"```\n{output}```"
     
