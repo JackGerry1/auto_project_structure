@@ -1,10 +1,9 @@
 import os
 
-PATH = "test1"
-LENGTH = 3
+PATH = "/home/jack/Documents/Work/Job Applications/Anima International Prep/reactProject/src"
 
 
-def build_structure(path):
+def build_structure(path: str) -> dict:
 
     structure = {}
     for item in os.listdir(path):
@@ -22,31 +21,30 @@ def build_structure(path):
     return sorted_structure
 
 
-def trim_dictionary(structure):
-    for _, val in list(structure.items()):  
-        
+def trim_dictionary(structure: dict, max_length: int) -> dict:
+    trimmed = {}
+    for key, val in structure.items():
         if isinstance(val, dict):
-            
-            if len(val) - 1 > LENGTH:
-                for k in list(val.keys())[LENGTH:]:
-                    del val[k]
+            sub = trim_dictionary(val, max_length)
+            trimmed[key] = dict(list(sub.items())[:max_length])
+        else:
+            trimmed[key] = val
 
-            trim_dictionary(val)
+    return trimmed
 
-def print_structure(structure, prefix="", root=True):
+
+def print_structure(structure: dict, prefix="", root=True) -> str:
     output = ""
 
     items = list(structure.items())
     for i, (name, content) in enumerate(items):
         is_last = i == len(items) - 1
 
-        connector = "└── " if not root and is_last else (
-            "├── " if not root else "")
+        connector = "" if root else ("├── " if not is_last else "└── ")
 
         if isinstance(content, dict):
             output += f"{prefix}{connector}{name}/\n"
-            new_prefix = prefix + \
-                ("" if root else ("    " if is_last else "│   "))
+            new_prefix = prefix + ("" if root else "│   ")
             output += print_structure(content, new_prefix, root=False)
         else:
             output += f"{prefix}{connector}{name}\n"
@@ -54,9 +52,16 @@ def print_structure(structure, prefix="", root=True):
     return output
 
 
-file_structure = {os.path.basename(PATH): build_structure(PATH)}
+def main(): 
+    file_structure = {os.path.basename(PATH): build_structure(PATH)}
 
-trim_dictionary(file_structure)
+    length = 10
 
-output = print_structure(file_structure)
-print(f"```\n{output}```")
+    cleaned_structure = trim_dictionary(file_structure, length)
+
+    output = print_structure(cleaned_structure)
+    final_output = f"```\n{output}```"
+    
+    print(final_output)
+
+main()
