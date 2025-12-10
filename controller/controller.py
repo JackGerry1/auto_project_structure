@@ -1,5 +1,6 @@
+from pathlib import Path
 from tkinter import filedialog
-import os
+
 
 class Controller:
     def __init__(self, model, view):
@@ -19,7 +20,7 @@ class Controller:
             return
 
         structure = self.model.build_structure(path)
-        structure = {os.path.basename(path): structure}
+        structure = {Path(path).name: structure}
         trimmed = self.model.trim_dictionary(structure, max_length)
         output = self.model.print_structure(trimmed)
         formatted = self.model.format_final_output(output)

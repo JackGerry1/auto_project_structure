@@ -6,7 +6,7 @@ from controller.controller import Controller
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title('Tkinter MVC Demo')
+        self.title('Auto Project Structure Generator')
 
         model = Model()
         view = View(self)

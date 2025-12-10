@@ -1,6 +1,6 @@
 import sys
-import os
 from model.model import Model
+from pathlib import Path
 
 path = sys.argv[1]
 length = int(sys.argv[2])
@@ -9,7 +9,7 @@ save_path = f"{path}/project_structure.txt"
 model = Model()
 
 structured_path = model.build_structure(path)
-structure = {os.path.basename(path): structured_path}
+structure = {Path(path).name: structured_path}
 trimmed = model.trim_dictionary(structure, length)
 output = model.print_structure(trimmed)
 formatted = model.format_final_output(output)

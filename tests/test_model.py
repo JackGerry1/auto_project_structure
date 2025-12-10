@@ -1,12 +1,8 @@
 import os
-import sys
 import pytest
+from model.model import Model
 
-# Ensure the src directory is importable
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
-
-from main import print_structure, trim_dictionary, build_structure
-
+model = Model()
 
 # --- Fixtures -----------------------------------------------------------------
 
@@ -53,7 +49,7 @@ def test_build_structure(mock_src):
             "main.jsx": None,
         }
     }
-    result = {"src": build_structure(str(mock_src))}
+    result = {"src": model.build_structure(str(mock_src))}
     assert result == expected
 
 
@@ -66,8 +62,8 @@ def test_trim_dictionary(mock_test1):
             "file.js": None,
         }
     }
-    structure = build_structure(str(mock_test1))
-    trimmed = trim_dictionary(structure, 10)
+    structure = model.build_structure(str(mock_test1))
+    trimmed = model.trim_dictionary(structure, 10)
     result = {"test1": trimmed}
     assert result == expected
 
@@ -87,5 +83,5 @@ def test_print_structure_simple():
         "└── main.jsx\n"
     )
 
-    result = print_structure(structure)
+    result = model.print_structure(structure)
     assert result == expected_output

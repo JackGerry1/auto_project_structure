@@ -1,21 +1,21 @@
-import os
+from pathlib import Path
 
 class Model:
-    def __init__(self):
-        pass
-
-    def build_structure(self, path: str) -> dict:
+    def build_structure(self, path: str | Path) -> dict:
+        path = Path(path)
         structure = {}
-        for item in os.listdir(path):
-            item_path = os.path.join(path, item)
-            if os.path.isdir(item_path):
-                structure[item] = self.build_structure(item_path)
-            else:
-                structure[item] = None
 
+        for item in path.iterdir():
+            if item.is_dir():
+                structure[item.name] = self.build_structure(item)
+            else:
+                structure[item.name] = None
+
+        # Sort so that directories (dict values) come before files (None values)
         sorted_structure = dict(
-            sorted(structure.items(), key=lambda item: not isinstance(item[1], dict))
+            sorted(structure.items(), key=lambda kv: not isinstance(kv[1], dict))
         )
+
         return sorted_structure
 
     def trim_dictionary(self, structure: dict, max_length: int) -> dict:

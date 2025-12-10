@@ -1,0 +1,12 @@
+```
+test2/
+├── folder_again/
+├── another_folder/
+│   ├── folder_in_folder/
+│   │   └── something_inside.txt
+│   ├── something.txt
+│   ├── another.txt
+│   └── something.py
+├── something.c
+└── project_structure.txt
+```
