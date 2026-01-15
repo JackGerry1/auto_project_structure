@@ -82,4 +82,5 @@ Tests cover building, trimming, and printing trees (see [tests/test_model.py](te
 
 
 ## License
-Add your license information here.
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
